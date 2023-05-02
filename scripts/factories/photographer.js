@@ -12,12 +12,15 @@ function photographerFactory(data) {
         // titre
         const h2 = document.createElement( 'h2' );
         h2.textContent = name;
+        // résidence
         const residence = document.createElement('div');
         residence.className = 'residence';
         residence.textContent = `${city}, ${country}`;
+        // tagline
         const tag = document.createElement('div');
         tag.className = 'tagline';
         tag.textContent = tagline;
+        // prix
         const tarif = document.createElement('div');
         tarif.className = 'price';
         tarif.textContent = `${price}€/jour`;
