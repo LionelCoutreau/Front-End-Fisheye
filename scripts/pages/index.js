@@ -3,37 +3,8 @@
         // mais il sera à remplacer avec une requête sur le fichier JSON en utilisant "fetch".
         const response = await fetch('../../data/photographers.json');
         const json = await response.json();
-        console.log("Success:", json);
-        return json;
-
-        // await fetch('../../data/photographers.json')
-        // .then((response) => response.json())
-        // .then((json) => console.log(json.photographers));
-
-        // let photographers = [
-        //     {
-        //         "name": "Ma data test",
-        //         "id": 1,
-        //         "city": "Paris",
-        //         "country": "France",
-        //         "tagline": "Ceci est ma data test",
-        //         "price": 400,
-        //         "portrait": "account.png"
-        //     },
-        //     {
-        //         "name": "Autre data test",
-        //         "id": 2,
-        //         "city": "Londres",
-        //         "country": "UK",
-        //         "tagline": "Ceci est ma data test 2",
-        //         "price": 500,
-        //         "portrait": "account.png"
-        //     },
-        // ]
-
-        // et bien retourner le tableau photographers seulement une fois récupéré
-        // return ({
-        //     photographers: [...photographers, ...photographers, ...photographers]})
+        console.log("Success:", json.photographers);
+        return json.photographers;
     }
 
     async function displayData(photographers) {
@@ -48,7 +19,8 @@
 
     async function init() {
         // Récupère les datas des photographes
-        const { photographers } = await getPhotographers();
+        const photographers = await getPhotographers();
+        console.log("photographers : " + photographers);
         displayData(photographers);
     };
     
