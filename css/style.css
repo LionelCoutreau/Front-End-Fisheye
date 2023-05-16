@@ -56,6 +56,10 @@ h1 {
     margin-bottom:20px;
 }
 
+.photographer_section article .link {
+    text-align:center;
+    text-decoration: none;
+}
 
 .photographer_section article .residence {
     color: #901C1C;

@@ -6,7 +6,42 @@
     background-color: #FAFAFA;
     height: 300px;
     margin: 0 100px;
+    display:flex;
+    justify-content: space-between;
+    align-items: center;
+    border-radius:5px;
+    padding-left:50px;
+    padding-right:50px;
 }
+
+.photograph-img {
+    height: 200px;
+    width: 200px;
+    object-fit:cover;
+    border-radius:100px;
+    margin-bottom:20px;
+}
+
+.photograph-name {
+    color: #D3573C;
+    font-size: 36px;
+    font-weight:400;
+    margin:0;
+}
+
+.photograph-country {
+    color: #901C1C;
+    font-size: 24px;
+    margin-top:8px;
+    margin-bottom:8px;
+}
+
+
+.photograph-tagline {
+    color: #525252;
+    font-size: 18px;
+}
+
 
 .contact_button {
     font-size: 20px;
