@@ -1,36 +1,62 @@
 function mediaFactory(data) {
     const { id, photographerId, title, image, video, likes, date, price } = data;
 
-    //const picture = `assets/photographers/${portrait}`;
+    async function getMediaFolder()
+    {
+        const response = await fetch('../../data/photographers.json');
+        const json = await response.json();
+        const photographer = json.photographers.filter(photographer => photographer.id === photographerId);
+        const completeName = photographer[0].name.split(' ');
+        const mediaPath = `assets/images/${completeName[0]}`;
+        return mediaPath;
+    }
 
-    function getMediaCardDOM() {
+    async function getMediaCardDOM() {
+        const mediaFolder = await getMediaFolder();
         // bloc carte
         const article = document.createElement( 'article' );
-        // // image
-        // const img = document.createElement( 'img' );
-        // img.setAttribute("src", picture)
-        // // titre
-        // const h2 = document.createElement( 'h2' );
-        // h2.textContent = name;
-        // // résidence
-        // const residence = document.createElement('div');
-        // residence.className = 'residence';
-        // residence.textContent = `${city}, ${country}`;
-        // // tagline
-        // const tag = document.createElement('div');
-        // tag.className = 'tagline';
-        // tag.textContent = tagline;
-        // // prix
-        // const tarif = document.createElement('div');
-        // tarif.className = 'price';
-        // tarif.textContent = `${price}€/jour`;
+        // vignette
+        const vignette = document.createElement( 'img' );
+        if(video) {
+            const videoNameAndExtension = video.split('.');
+            vignette.setAttribute("src", `${mediaFolder}/${videoNameAndExtension[0]}.jpg`);
+        }
+        else {
+            vignette.setAttribute("src", `${mediaFolder}/${image}`);
+        }
+        // bloc nom
+        const nameBloc = document.createElement( 'div' );
+        nameBloc.className = 'media-name';
+        // title
+        const h3 = document.createElement( 'h2' );
+        h3.className = 'media-title';
+        h3.textContent = title;
+        // bloc likes
+        const likesBloc = document.createElement('div');
+        likesBloc.className = 'media-likes';
+        // nombre likes
+        const likesNumber = document.createElement('div');
+        likesNumber.className = 'media-likes-number';
+        likesNumber.textContent = likes;
+        // icone likes
+        const likesIcon = document.createElement('img');
+        likesIcon.className = 'media-likes-icon';
+        likesIcon.setAttribute("src", `assets/icons/heart.svg`);
 
-        // article.appendChild(img);
-        // article.appendChild(h2);
-        // article.appendChild(residence);
-        // article.appendChild(tag);
-        // article.appendChild(tarif);
+        // Mise en forme du bloc likes
+        likesBloc.appendChild(likesNumber);
+        likesBloc.appendChild(likesIcon);
+        // Mise en forme du bloc nom
+        nameBloc.appendChild(h3);
+        nameBloc.appendChild(likesBloc);
+        // Mise en forme du bloc media
+        article.appendChild(vignette);
+        article.appendChild(nameBloc);
+
         return (article);
     }
-    return { /*name, picture,*/ getMediaCardDOM }
+
+
+
+    return { getMediaFolder, getMediaCardDOM }
 }
