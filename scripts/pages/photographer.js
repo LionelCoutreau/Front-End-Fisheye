@@ -18,28 +18,36 @@ async function getPhotographer() {
 
 async function displayData(medias) {
     const mediasSection = document.querySelector(".medias_section");
-
-    medias.forEach((media) => {
+    let totalLikes = 0;
+    medias.forEach(async (media) => {
+        totalLikes += media.likes;
         const mediaModel = mediaFactory(media);
-        const mediaCardDOM = mediaModel.getMediaCardDOM();
-        console.log(mediaCardDOM);
+        const mediaCardDOM = await mediaModel.getMediaCardDOM();
         mediasSection.appendChild(mediaCardDOM);
     });
+    document.querySelector(".total-likes-number").innerText = totalLikes;
 };
+
+function updateTotalLikes() {
+    let totalLikes = 0;
+    console.log("totalLikes begin:", totalLikes);
+    document.querySelectorAll(".media-likes-number").forEach((number) => {
+        totalLikes += Number(number);
+        console.log("totalLikes:", totalLikes);
+    });
+    document.querySelector(".total-likes-number").innerText = totalLikes;
+}
 
 async function init() {
     // récupère les infos du photographe via l'ID contenue dans l'URL
-    const urlParams = new URL(window.location.toLocaleString()).searchParams;
-    const photographerId = urlParams.get('id');
-    console.log("Photographer ID:" + photographerId);
     const photographerData = await getPhotographer(photographerId);
-    console.log("photographerData:", photographerData);
 
     const photographerName = photographerData[0].name;
     const photographerCity = photographerData[0].city;
     const photographerCountry = photographerData[0].country;
     const photographerTagline = photographerData[0].tagline;
     const photographerPortrait = `assets/photographers/${photographerData[0].portrait}`;
+    const photographerPrice = photographerData[0].price;
     
     // Affiche les infos du photographe
     document.querySelector(".photograph-name").innerText = photographerName;
@@ -47,12 +55,11 @@ async function init() {
     document.querySelector(".photograph-tagline").innerText = photographerTagline;
     document.querySelector(".photograph-img").src = photographerPortrait;
     document.querySelector(".photograph-img").alt = photographerName;
+    document.querySelector(".total-price").innerText = `${photographerPrice}€ / jour`;
     
     // Récupère les datas des médias d'un photographe
-    const medias = await getMedias();
-    console.log("medias : " + medias);
-    displayData(medias);
+    const mediasData = await getMedias();
+    displayData(mediasData);
 };
 
 init();
-

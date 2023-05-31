@@ -21,6 +21,17 @@
         <button class="contact_button" onclick="displayModal()">Contactez-moi</button>
         <img class="photograph-img" src="" alt="" />
       </div>
+      <div class="media_tri">
+        <label>Trier par :</label>
+        <div class="media_select_bloc">
+          <button class="media_selected">Popularité</button>
+          <div class="media_select_menu">
+            <div class="media_select_menu_option">Popularité</div>
+            <div class="media_select_menu_option">Date</div>
+            <div class="media_select_menu_option">Titre</div>
+          </div>
+        </div>
+      </div>
       <div class="medias_section"></div>
     </main>
     <div id="contact_modal">
@@ -38,6 +49,13 @@
 				</form>
 			</div>
 		</div>
+    <div class="total-likes-price">
+      <div class="total-likes">
+        <div class="total-likes-number">297 081</div>
+        <img class="total-likes-icon" src="assets/icons/heart-black.svg" />
+      </div>
+      <div class="total-price">300€ / jour</div>
+    </div>
     <script src="scripts/factories/media.js"></script>
     <script src="scripts/pages/photographer.js"></script>
     <script src="scripts/utils/contactForm.js"></script>

@@ -39,7 +39,7 @@ function photographerFactory(data) {
         article.appendChild(residence);
         article.appendChild(tag);
         article.appendChild(tarif);
-        return (article);
+        return article;
     }
     return { name, picture, getUserCardDOM }
 }

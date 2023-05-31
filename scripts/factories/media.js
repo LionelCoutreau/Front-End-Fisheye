@@ -17,6 +17,7 @@ function mediaFactory(data) {
         const article = document.createElement( 'article' );
         // vignette
         const vignette = document.createElement( 'img' );
+        vignette.className = 'media-vignette';
         if(video) {
             const videoNameAndExtension = video.split('.');
             vignette.setAttribute("src", `${mediaFolder}/${videoNameAndExtension[0]}.jpg`);
@@ -41,7 +42,8 @@ function mediaFactory(data) {
         // icone likes
         const likesIcon = document.createElement('img');
         likesIcon.className = 'media-likes-icon';
-        likesIcon.setAttribute("src", `assets/icons/heart.svg`);
+        likesIcon.setAttribute("src", 'assets/icons/heart.svg');
+        likesIcon.setAttribute("alt", 'likes');
 
         // Mise en forme du bloc likes
         likesBloc.appendChild(likesNumber);
@@ -53,10 +55,8 @@ function mediaFactory(data) {
         article.appendChild(vignette);
         article.appendChild(nameBloc);
 
-        return (article);
+        return article;
     }
-
-
 
     return { getMediaFolder, getMediaCardDOM }
 }
