@@ -22,13 +22,13 @@
         <img class="photograph-img" src="" alt="" />
       </div>
       <div class="media_tri">
-        <label>Trier par :</label>
+        <div class="media_label">Trier par :</div>
         <div class="media_select_bloc">
-          <button class="media_selected">Popularité</button>
+          <button class="media_selected" onclick="toggleFilter()">Popularité</button>
           <div class="media_select_menu">
-            <div class="media_select_menu_option">Popularité</div>
-            <div class="media_select_menu_option">Date</div>
-            <div class="media_select_menu_option">Titre</div>
+            <a class="media_select_menu_option" onclick="sortMedias('popularity', this.innerText)">Popularité</a>
+            <a class="media_select_menu_option" onclick="sortMedias('date', this.innerText)">Date</a>
+            <a class="media_select_menu_option" onclick="sortMedias('title', this.innerText)">Titre</a>
           </div>
         </div>
       </div>

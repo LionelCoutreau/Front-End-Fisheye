@@ -130,6 +130,73 @@
     height:18px;
 }
 
+.media_tri {
+    padding-left:97px;
+    display:flex;
+    align-items:center;
+}
+
+.media_label {
+    font-weight:700;
+    font-size:18px;
+}
+
+.media_select_bloc {
+    position:relative;
+    margin-left: 10px;
+}
+
+.media_selected {
+    width:190px;
+    background-color:#911C1C;
+    border-radius:5px;
+    padding:10px;
+    color:#ffffff;
+    font-size:18px;
+    border:0px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+}
+
+.media_selected::after {
+    content: url(../assets/icons/chevron-down.svg);
+    height: 16px;
+    width: 16px;
+}
+
+.media_select_menu {
+    position:absolute;
+    visibility:hidden;
+    top:0;
+    width:170px;
+    background-color:#911C1C;
+    border-radius:5px;
+    padding:10px;
+    z-index: 999;
+}
+
+.media_select_menu_option {
+    color:#ffffff;
+    font-weight:700;
+    font-size:18px;
+    padding:10px;
+    border-top: 1px solid #ffffff;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+}
+
+.media_select_menu_option:first-child {
+    border-top: 0px;
+}
+
+.media_select_menu_option:first-child::after {
+    content: url(../assets/icons/chevron-up.svg);
+    height: 16px;
+    width: 16px;
+}
+
 .contact_button {
     font-size: 20px;
     font-weight: bold;
