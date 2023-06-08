@@ -15,6 +15,7 @@ function mediaFactory(data) {
         const mediaFolder = await getMediaFolder();
         // bloc carte
         const article = document.createElement( 'article' );
+        article.setAttribute("id", `media_${id}`);
         // vignette
         const vignette = document.createElement( 'img' );
         vignette.className = 'media-vignette';
@@ -44,6 +45,7 @@ function mediaFactory(data) {
         likesIcon.className = 'media-likes-icon';
         likesIcon.setAttribute("src", 'assets/icons/heart.svg');
         likesIcon.setAttribute("alt", 'likes');
+        likesIcon.setAttribute("onclick", `incrementLike(${id})`)
 
         // Mise en forme du bloc likes
         likesBloc.appendChild(likesNumber);
