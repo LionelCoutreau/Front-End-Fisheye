@@ -3,6 +3,7 @@ function photographerFactory(data) {
 
     const picture = `assets/photographers/${portrait}`;
 
+    // Construction d'une carte de photographe
     function getUserCardDOM() {
         // bloc carte
         const article = document.createElement( 'article' );
@@ -34,7 +35,8 @@ function photographerFactory(data) {
         // lien cliquable sur l'image et le titre
         lien.appendChild(img);
         lien.appendChild(h2);
-        //construction de la carte du photographe
+
+        // Mise en place de la carte
         article.appendChild(lien);
         article.appendChild(residence);
         article.appendChild(tag);

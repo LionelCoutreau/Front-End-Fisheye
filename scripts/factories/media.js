@@ -1,6 +1,7 @@
-function mediaFactory(data) {
+function mediaFactory(data, countData = 0) {
     const { id, photographerId, title, image, video, likes, date, price } = data;
 
+    // Obtention du répertoire des médias du photographe
     async function getMediaFolder()
     {
         const response = await fetch('../../data/photographers.json');
@@ -11,6 +12,7 @@ function mediaFactory(data) {
         return mediaPath;
     }
 
+    // Construction de la carte du média
     async function getMediaCardDOM() {
         const mediaFolder = await getMediaFolder();
         // bloc carte
@@ -26,6 +28,11 @@ function mediaFactory(data) {
         else {
             vignette.setAttribute("src", `${mediaFolder}/${image}`);
         }
+        vignette.setAttribute('data-media_position', countData)
+        vignette.addEventListener('click', (e) => {
+            var position = e.target.dataset.media_position;
+            openLightbox(data, position);
+        })
         // bloc nom
         const nameBloc = document.createElement( 'div' );
         nameBloc.className = 'media-name';
