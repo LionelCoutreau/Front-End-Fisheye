@@ -18,7 +18,7 @@
           <div class="photograph-country"></div>
           <div class="photograph-tagline"></div>
         </div>
-        <button class="contact_button" onclick="displayModal()">Contactez-moi</button>
+        <button class="contact_button" id="contact-open" onclick="openModal()">Contactez-moi</button>
         <img class="photograph-img" src="" alt="" />
       </div>
       <div class="media_tri">
@@ -34,21 +34,50 @@
       </div>
       <div class="medias_section"></div>
     </main>
-    <div id="contact_modal">
+
+
+    <div class="contact_modal" id="contact_modal">
 			<div class="modal">
-				<header>
-          <h2>Contactez-moi</h2>
-          <img src="assets/icons/close.svg" onclick="closeModal()" />
-        </header>
-				<form>
-					<div>
-						<label>Prénom</label>
-						<input />
-					</div>
-          <button class="contact_button">Envoyer</button>
+				<div class="contact_modal-header">
+          <h2 id="title-form">Contactez-moi</h2>
+          <button aria-label="close contact form" id='contact-close' onclick="closeModal()" tabindex="6">
+            <img src="assets/icons/close.svg" alt="close modal" />
+          </button> 
+        </div>
+				<form method="dialog" id="contact-form">
+					<label for="contact-firstName" id="label-firstName">Prénom</label>
+          <input type="text" id="contact-firstName" tabindex="1" aria-labelledby="label-firstName" />
+          <span id="error-firstName"></span>
+          <label for="contact-lastName" id="label-lastName">Nom</label>
+          <input type="text" id="contact-lastName" tabindex="2" aria-labelledby="label-lastName" />
+          <span id="error-lastName"></span>
+          <label for="contact-email" id="label-email">Email</label>
+          <input type="text" id="contact-email" tabindex="3" aria-labelledby="label-email" />
+          <span id="error-email"></span>
+          <label for="contact-message" id="label-message">Votre message</label>
+          <textarea rows="3" id="contact-message" tabindex="4" aria-labelledby="label-message"></textarea>
+          <span id="error-message"></span>
+          <button type="submit" class="contact_button" id="contact-submit" tabindex="5" aria-label="Send">Envoyer</button>
 				</form>
 			</div>
 		</div>
+
+    <div class="lightbox" id="lightbox-modal" role="dialog" aria-hidden="true" aria-modal="true" aria-label="image closeup view">
+      <button class="lightbox-close" tabindex="5" id="lightbox-close" aria-label="close dialog">
+        <img src="assets/icons/lightbox-close.svg" alt="close lightbox" />
+      </button>
+      <div class="lightbox-content">
+        <a aria-label="previous image" tabindex="3" id="lightbox-previous">
+          <img class="lightbox-button" src="assets/icons/lightbox-prev.svg" alt="previous media" />
+        </a>
+        <div id="lightbox-content">
+        </div>
+        <a aria-label="Next image" tabindex="1" id="lightbox-next">
+          <img class="lightbox-button" src="assets/icons/lightbox-next.svg" alt="next media" />
+        </a>
+      </div>
+    </div>
+
     <div class="total-likes-price">
       <div class="total-likes">
         <div class="total-likes-number">297 081</div>
@@ -59,5 +88,6 @@
     <script src="scripts/factories/media.js"></script>
     <script src="scripts/pages/photographer.js"></script>
     <script src="scripts/utils/contactForm.js"></script>
+    <script src="scripts/utils/lightbox.js"></script>
   </body>
 </html>

@@ -3,6 +3,7 @@ const urlParams = new URL(window.location.toLocaleString()).searchParams;
 const photographerId = Number(urlParams.get('id'));
 let dataMediasPhotographer;
 
+
 async function getMedias() {
     const response = await fetch('../../data/photographers.json');
     const json = await response.json();
@@ -20,14 +21,14 @@ async function getPhotographer() {
 async function displayData(medias) {
     const mediasSection = document.querySelector(".medias_section");
     mediasSection.innerHTML = "";
-    //let totalLikes = 0;
+    let countData = 0;
     medias.forEach(async (media) => {
-        //totalLikes += media.likes;
-        const mediaModel = mediaFactory(media);
+        console.log("count : ", countData);
+        const mediaModel = mediaFactory(media, countData);
         const mediaCardDOM = await mediaModel.getMediaCardDOM();
         mediasSection.appendChild(mediaCardDOM);
+        countData++;
     });
-    //document.querySelector(".total-likes-number").innerText = totalLikes;
 };
 
 function incrementLike(idMedia) {
@@ -116,6 +117,11 @@ async function init() {
     dataMediasPhotographer = mediasData;
     await sortMedias('popularity', 'Popularité') 
     updateTotalLikes();
+
+    // Ajout du nom du photographe au titre du modal form
+    let title = document.getElementById('title-form');
+    console.log(title);
+    title.innerHTML += "\n" + photographerData[0].name;
 };
 
 init();
