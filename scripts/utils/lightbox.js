@@ -1,14 +1,16 @@
 let lightbox = document.getElementById('lightbox-modal')
 
 // Variable globales pour stocker mes medias
-let medias = ''
+let medias = ""
+let mediaPath = "";
 
 // Fonction pour ouvrir la lightbox
-function openLightbox(data, position) {
+function openLightbox(data, path, position) {
     console.log("Data : ", data);
     console.log("Position :", position);
     lightbox.style.display = "block";
     lightbox.ariaHidden = "false";
+    mediaPath = path;
 
     // Ajout des medias dans la variable globale
     medias = data;
@@ -26,7 +28,6 @@ function openLightbox(data, position) {
     document.getElementById('lightbox-previous').addEventListener('keyup', (e) => { if (e.key === "Enter") { previousSlide() } })
 }
 
-
 // Fonction pour fermer la lightbox
 function closeLightbox() {
     lightbox.style.display = "none";
@@ -42,19 +43,17 @@ function closeLightbox() {
     document.getElementById('lightbox-previous').removeEventListener('keyup', (e) => { if (e.key === "Enter") { previousSlide() } })
 }
 
-
 // Fonction pour garder le focus dans le modal dialog de la lightbox
-function accessibilityFocus(element) {
+function accessibilityFocus(event) {
     let modalNodes = lightbox.getElementsByTagName('*')
-    let isInclude = Array.from(modalNodes).filter((e) => e.isEqualNode(element.target))
+    let isInclude = Array.from(modalNodes).filter((e) => e.isEqualNode(event.target))
     if (isInclude.length === 0)
         document.getElementById('lightbox-next').focus()
 }
 
-
 // Affichage d'une photo dans le modal lightbox
 function displayMediaLightbox(medias, position) {
-    console.log("medias : ", medias);
+    console.log("medias : ", medias, "\nmediaPath : ", mediaPath, "\nposition : ", position);
     let lightboxContent = document.getElementById('lightbox-content')
     lightboxContent.innerHTML = ""
 
@@ -66,7 +65,7 @@ function displayMediaLightbox(medias, position) {
         img.tabIndex = 2
         img.classList.add('lightbox-img')
         img.setAttribute('data-current_position', position)
-        img.setAttribute('src', `assets/images/${media.image}`);
+        img.setAttribute('src', `${mediaPath}/${media.image}`);
         img.alt = media.image.replaceAll('_', " ").replaceAll('.jpg', "");
 
         let h2 = document.createElement('h2');
@@ -82,7 +81,7 @@ function displayMediaLightbox(medias, position) {
         video.classList.add('lightbox-img');
         video.setAttribute('controls', true)
         video.setAttribute('data-current_position', position)
-        video.setAttribute('src', `assets/images/${media.video}`);
+        video.setAttribute('src', `${mediaPath}/${media.video}`);
         video.alt = media.video.replaceAll('_', " ").replaceAll('.mp4', "");
         video.play()
 
@@ -96,7 +95,7 @@ function displayMediaLightbox(medias, position) {
 
 }
 
-// ---------- Fonction pour génrer les écoiuteurs d'évènemment ----------
+// Gestion du clavier pour les listener
 function listenerKey(e) {
     switch (e.key) {
         case 'ArrowRight':
@@ -111,8 +110,11 @@ function listenerKey(e) {
     }
 }
 
+// Média suivant
 function nextSlide() {
     let current_position = Number(document.querySelector('.lightbox-img').dataset.current_position);
+    console.log("nextSlide current_position : ", current_position)
+    console.log("next position : ", current_position + 1)
     if (current_position + 1 < medias.length) {
         displayMediaLightbox(medias, current_position + 1)
     }
@@ -121,8 +123,11 @@ function nextSlide() {
     }
 }
 
+// Média précédent
 function previousSlide() {
     let current_position = Number(document.querySelector('.lightbox-img').dataset.current_position);
+    console.log("previousSlide current_position : ", current_position)
+    console.log("previous position : ", current_position - 1)
     if (current_position - 1 >= 0) {
         displayMediaLightbox(medias, current_position - 1)
     }
@@ -130,3 +135,5 @@ function previousSlide() {
         displayMediaLightbox(medias, medias.length - 1)
     }
 }
+
+export { openLightbox }

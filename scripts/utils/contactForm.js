@@ -16,10 +16,9 @@ function closeModal() {
 }
 
 // Garder le focus dans le modal
-function accessibilityFocus(element) {
+function accessibilityFocus(event) {
     let modalNodes = modal.getElementsByTagName('*')
-    let isInclude = Array.from(modalNodes).filter((e) => e.isEqualNode(element.target))
-    console.log(element.target)
+    let isInclude = Array.from(modalNodes).filter((e) => e.isEqualNode(event.target))
     if (isInclude.length === 0)
         document.getElementById('contact-firstName').focus()
 }
@@ -59,22 +58,18 @@ function submit(e) {
         // Écriture des erreurs du formulaire
         if (!checkMinLength(firstName, 1))
             writeError('error-firstName', "Veuillez renseignez le champs");
-
         if (!checkMinLength(lastName, 1))
             writeError('error-lastName', "Veuillez renseignez le champs");
-
         if (!validateEmail(email))
             writeError('error-email', "Le format de l'email n'est pas correct.");
-
         if (!checkMinLength(email))
             writeError('error-message', "Veuillez renseigner un message");
 
-        return false
+        return false;
     }
 }
 
-//  ------- Function de test pour les champs de text -------
-
+// Listener de vérification de champ : caractères minimum
 function eventListenerCheckMinLength(id, length, idError, error) {
     document.getElementById(id).addEventListener('input', (e) => {
         if (!checkMinLength(e.target.value, length))
@@ -84,6 +79,7 @@ function eventListenerCheckMinLength(id, length, idError, error) {
     })
 }
 
+// Listener de vérification de champ : format de l'email
 function eventListenerValidateEmail(id, idError, error) {
     document.getElementById(id).addEventListener('input', (e) => {
         if (!validateEmail(e.target.value))
@@ -93,20 +89,15 @@ function eventListenerValidateEmail(id, idError, error) {
     })
 }
 
-function eventListenerSubmit() {
-    document.getElementById('contact-form').addEventListener('submit', (e) => {
-        submit(e);
+// Listener de touche clavier : fermeture modale si touche "escape"
+function eventListenerEscape()
+{
+    document.addEventListener('keyup', (e) => {
+        if (e.key === "Escape")
+        {
+            closeModal();
+        }
     })
 }
 
-//  ------- Function éxécutée à l'instanciation de la factory -------
-function initForm() {
-    // Créer les éventListener sur les champs du formulaire
-    eventListenerCheckMinLength('contact-firstName', 1, 'error-firstName', 'Veuillez renseignez le champs');
-    eventListenerCheckMinLength('contact-lastName', 1, 'error-lastName', 'Veuillez renseignez le champs');
-    eventListenerValidateEmail('contact-email', 'error-email', 'Le format de l\'email n\'est pas correct.');
-    eventListenerCheckMinLength('contact-message', 10, 'error-message', 'Veuillez renseigner un message de plus de 10 caractères');
-    eventListenerSubmit();
-}
-
-initForm();
+export { openModal, closeModal, submit, eventListenerCheckMinLength, eventListenerValidateEmail, eventListenerEscape }

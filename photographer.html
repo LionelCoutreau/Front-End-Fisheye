@@ -9,7 +9,9 @@
   </head>
   <body>
     <header>
-      <img src="assets/images/logo.png" class="logo" />
+      <a href="/" title="Page d'accueil Fisheye" tabindex="7">
+        <img src="assets/images/logo.png" class="logo" alt="Fisheye" />
+      </a>
     </header>
     <main id="main">
       <div class="photograph-header">
@@ -18,29 +20,31 @@
           <div class="photograph-country"></div>
           <div class="photograph-tagline"></div>
         </div>
-        <button class="contact_button" id="contact-open" onclick="openModal()">Contactez-moi</button>
+        <button class="contact_button" id="contact-open" tabindex="8" aria-role="button" aria-controls="modal"
+        aria-label="Contact me">Contactez-moi</button>
         <img class="photograph-img" src="" alt="" />
       </div>
+
       <div class="media_tri">
         <div class="media_label">Trier par :</div>
         <div class="media_select_bloc">
-          <button class="media_selected" onclick="toggleFilter()">Popularité</button>
+          <button class="media_selected" tabindex="9" aria-label="Order by">Popularité</button>
           <div class="media_select_menu">
-            <a class="media_select_menu_option" onclick="sortMedias('popularity', this.innerText)">Popularité</a>
-            <a class="media_select_menu_option" onclick="sortMedias('date', this.innerText)">Date</a>
-            <a class="media_select_menu_option" onclick="sortMedias('title', this.innerText)">Titre</a>
+            <a class="media_select_menu_option" tabindex="1">Popularité</a>
+            <a class="media_select_menu_option" tabindex="2">Date</a>
+            <a class="media_select_menu_option" tabindex="3">Titre</a>
           </div>
         </div>
       </div>
+
       <div class="medias_section"></div>
     </main>
 
-
-    <div class="contact_modal" id="contact_modal">
-			<div class="modal">
+    <dialog class="contact_modal" id="contact_modal" aria-hidden="true" aria-modal="true" aria-labelledby="title-form">
+			<div class="modal" role="dialog">
 				<div class="contact_modal-header">
           <h2 id="title-form">Contactez-moi</h2>
-          <button aria-label="close contact form" id='contact-close' onclick="closeModal()" tabindex="6">
+          <button aria-label="close contact form" id='contact-close' tabindex="6">
             <img src="assets/icons/close.svg" alt="close modal" />
           </button> 
         </div>
@@ -57,15 +61,15 @@
           <label for="contact-message" id="label-message">Votre message</label>
           <textarea rows="3" id="contact-message" tabindex="4" aria-labelledby="label-message"></textarea>
           <span id="error-message"></span>
-          <button type="submit" class="contact_button" id="contact-submit" tabindex="5" aria-label="Send">Envoyer</button>
+          <button type="submit" class="contact_button" id="contact-submit" tabindex="5" aria-label="Send form">Envoyer</button>
 				</form>
 			</div>
-		</div>
+		</dialog>
 
-    <div class="lightbox" id="lightbox-modal" role="dialog" aria-hidden="true" aria-modal="true" aria-label="image closeup view">
-      <button class="lightbox-close" tabindex="5" id="lightbox-close" aria-label="close dialog">
+    <div class="lightbox" id="lightbox-modal" role="dialog" aria-hidden="true" aria-modal="true" aria-label="media view">
+      <a class="lightbox-close" tabindex="5" id="lightbox-close" aria-label="close media view">
         <img src="assets/icons/lightbox-close.svg" alt="close lightbox" />
-      </button>
+      </a>
       <div class="lightbox-content">
         <a aria-label="previous image" tabindex="3" id="lightbox-previous">
           <img class="lightbox-button" src="assets/icons/lightbox-prev.svg" alt="previous media" />
@@ -80,14 +84,11 @@
 
     <div class="total-likes-price">
       <div class="total-likes">
-        <div class="total-likes-number">297 081</div>
+        <div class="total-likes-number" aria-label="Total likes"></div>
         <img class="total-likes-icon" src="assets/icons/heart-black.svg" />
       </div>
-      <div class="total-price">300€ / jour</div>
+      <div class="total-price" aria-label="photographer price">300€ / jour</div>
     </div>
-    <script src="scripts/factories/media.js"></script>
-    <script src="scripts/pages/photographer.js"></script>
-    <script src="scripts/utils/contactForm.js"></script>
-    <script src="scripts/utils/lightbox.js"></script>
+    <script src="scripts/pages/photographer.js" type="module"></script>
   </body>
 </html>
