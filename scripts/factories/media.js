@@ -1,4 +1,4 @@
-function mediaFactory(data, countData = 0) {
+export default function mediaFactory(data, tabIndexMediaNumber) {
     const { id, photographerId, title, image, video, likes, date, price } = data;
 
     // Obtention du répertoire des médias du photographe
@@ -21,6 +21,7 @@ function mediaFactory(data, countData = 0) {
         // vignette
         const vignette = document.createElement( 'img' );
         vignette.className = 'media-vignette';
+        vignette.tabIndex = tabIndexMediaNumber;
         if(video) {
             const videoNameAndExtension = video.split('.');
             vignette.setAttribute("src", `${mediaFolder}/${videoNameAndExtension[0]}.jpg`);
@@ -28,11 +29,6 @@ function mediaFactory(data, countData = 0) {
         else {
             vignette.setAttribute("src", `${mediaFolder}/${image}`);
         }
-        vignette.setAttribute('data-media_position', countData)
-        vignette.addEventListener('click', (e) => {
-            var position = e.target.dataset.media_position;
-            openLightbox(data, position);
-        })
         // bloc nom
         const nameBloc = document.createElement( 'div' );
         nameBloc.className = 'media-name';
@@ -50,9 +46,10 @@ function mediaFactory(data, countData = 0) {
         // icone likes
         const likesIcon = document.createElement('img');
         likesIcon.className = 'media-likes-icon';
+        likesIcon.tabIndex = tabIndexMediaNumber + 1;
+        likesIcon.setAttribute("id", `likes_${id}`);
         likesIcon.setAttribute("src", 'assets/icons/heart.svg');
         likesIcon.setAttribute("alt", 'likes');
-        likesIcon.setAttribute("onclick", `incrementLike(${id})`)
 
         // Mise en forme du bloc likes
         likesBloc.appendChild(likesNumber);
