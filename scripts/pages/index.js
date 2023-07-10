@@ -5,7 +5,6 @@ import photographerFactory from '../factories/photographer.js'
 const getPhotographers = async () => {
   const response = await fetch('../../data/photographers.json')
   const json = await response.json()
-  console.log('Success:', json.photographers)
   return json.photographers
 }
 
@@ -28,7 +27,6 @@ const displayData = async (photographers) => {
 const init = async () => {
   // Récupère les datas des photographes
   const photographers = await getPhotographers()
-  console.log('photographers : ' + photographers)
   displayData(photographers)
 }
 

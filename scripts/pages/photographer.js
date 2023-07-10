@@ -154,7 +154,6 @@ const accessSortingOptionsFocus = (event) => {
   const isInclude = Array.from(mediaSelectMenuOptions).filter(e =>
     e.isEqualNode(event.target)
   )
-  console.log(event.target)
   if (isInclude.length === 0) {
     mediaSelectMenuOptions[0].focus()
   }
@@ -317,7 +316,6 @@ const init = async () => {
 
   // Ajout du nom du photographe au titre du modal form
   const title = document.getElementById('title-form')
-  console.log(title)
   title.innerHTML += '\n' + photographerData[0].name
 }
 
