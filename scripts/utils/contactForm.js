@@ -61,6 +61,8 @@ const submit = (e) => {
     console.log(
       `Prénom : ${firstName}\nNom : ${lastName}\nEmail : ${email}\nMessage : ${message}`
     )
+    document.querySelector('.contact_modal-result').style.display = 'block'
+    document.querySelector('#contact-form').style.display = 'none'
     return true
   } else {
     // Écriture des erreurs du formulaire

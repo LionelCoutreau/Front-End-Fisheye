@@ -54,6 +54,7 @@ export default function mediaFactory (data, tabIndexMediaNumber) {
     likesIcon.setAttribute('id', `likes_${id}`)
     likesIcon.setAttribute('src', 'assets/icons/heart.svg')
     likesIcon.setAttribute('alt', 'likes')
+    likesIcon.setAttribute('data-liked', 'false')
 
     // Mise en forme du bloc likes
     likesBloc.appendChild(likesNumber)

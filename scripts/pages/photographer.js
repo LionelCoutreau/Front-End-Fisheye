@@ -91,9 +91,19 @@ const incrementLike = likesId => {
   const likesNumberDiv = document
     .querySelector(`#media_${idMedia}`)
     .querySelector('.media-likes-number')
+  const likesIconDiv = document
+    .querySelector(`#media_${idMedia}`)
+    .querySelector('.media-likes-icon')
+
   dataMediasPhotographer.forEach(media => {
     if (media.id === idMedia) {
-      media.likes++
+      if (likesIconDiv.dataset.liked === 'false') {
+        media.likes++
+        likesIconDiv.dataset.liked = 'true'
+      } else {
+        media.likes--
+        likesIconDiv.dataset.liked = 'false'
+      }
       likesNumberDiv.innerText = media.likes
     }
   })
