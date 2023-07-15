@@ -5,6 +5,11 @@
     display: none;
 }
 
+.photograph-body {
+    padding-bottom:65px;
+}
+
+/* informations du photographe */
 .photograph-header {
     background-color: #FAFAFA;
     height: 300px;
@@ -15,6 +20,7 @@
     border-radius:5px;
     padding-left:50px;
     padding-right:50px;
+    margin-bottom:20px;
 }
 
 .photograph-img {
@@ -45,6 +51,7 @@
     font-size: 18px;
 }
 
+/* Liste des médias */
 .medias_section {
     display: flex;
     margin-top: 20px;
@@ -133,8 +140,9 @@
     height:18px;
 }
 
+/* Sélection de tri */
 .media_tri {
-    padding-left:97px;
+    padding-left:60px;
     display:flex;
     align-items:center;
 }
@@ -200,6 +208,7 @@
     width: 16px;
 }
 
+/* Bouton de contact */
 .contact_button {
     font-size: 20px;
     font-weight: bold;

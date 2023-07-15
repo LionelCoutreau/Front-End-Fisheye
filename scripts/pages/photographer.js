@@ -42,7 +42,7 @@ const getPhotographer = async () => {
 }
 
 // Affichage des médias
-const displayData = async (medias) => {
+const displayData = async medias => {
   // récupère les infos du photographe via l'ID contenue dans l'URL
   const photographerData = await getPhotographer(photographerId)
   const completeName = photographerData[0].name.split(' ')
@@ -85,7 +85,7 @@ const displayData = async (medias) => {
 }
 
 // Incrémentation des likes d'un média
-const incrementLike = (likesId) => {
+const incrementLike = likesId => {
   const tabTmpLikesId = likesId.split('_')
   const idMedia = Number(tabTmpLikesId[1])
   const likesNumberDiv = document
@@ -135,6 +135,10 @@ const sortMedias = async (option, label) => {
   document.querySelector('.media_selected').innerText = label
   await displayData(dataMediasPhotographer)
   toggleFilter(true)
+  console.log('Objet dataMediasPhotographer')
+  dataMediasPhotographer.forEach(element => {
+    console.log(element.title, ' | ', element.likes, ' | ', element.date)
+  })
 }
 
 // Affichage des options de tri
@@ -150,7 +154,7 @@ const toggleFilter = (forceHide = false) => {
 }
 
 // Garder le focus dans les options de tri
-const accessSortingOptionsFocus = (event) => {
+const accessSortingOptionsFocus = event => {
   const isInclude = Array.from(mediaSelectMenuOptions).filter(e =>
     e.isEqualNode(event.target)
   )
@@ -160,7 +164,7 @@ const accessSortingOptionsFocus = (event) => {
 }
 
 // Gestion des listeners du modal form
-const formListener = (photographer) => {
+const formListener = photographer => {
   // Ouvrir le formulaire (bouton contact)
   document
     .getElementById('contact-open')
@@ -270,7 +274,7 @@ const filterListener = () => {
     element.addEventListener('click', () => {
       sortMedias(mediaFilterType, element.innerHTML)
     })
-    element.addEventListener('keypress', (e) => {
+    element.addEventListener('keypress', e => {
       if (e.key === 'Enter') {
         sortMedias(mediaFilterType, element.innerHTML)
       }
